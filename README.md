@@ -134,6 +134,8 @@ Removes some items from the bag. If the amount of removed items should go lower 
 
 ## ![](http://www.pokemonelite2000.com/sprites/rbspr/rbspr151.png) License
 
+Should someone from Nintendo see this and be offensed by the ROM presence in the example directory (which is only used for demonstration purpose), please feel free to contact me (either by a [regular issue](https://github.com/arcanis/pokelib) on this repository, or by email for more privacy - check [my Github profile](https://github.com/arcanis)), and I will remove the copyrighted material from the repository.
+
 > The MIT License (MIT)
 >
 > Copyright &copy; 2014 Maël Nison
