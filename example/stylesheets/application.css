@@ -1,0 +1,390 @@
+@import url(http://fonts.googleapis.com/css?family=Montserrat);
+@import url(//fonts.googleapis.com/css?family=Anaheim);
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+
+    padding: 0;
+
+    width: 100%;
+    height: 100%;
+
+    font-family: Anaheim;
+
+    background: #000;
+}
+
+canvas {
+    display: block;
+}
+
+[ng-click] {
+    cursor: pointer;
+}
+
+.interface {
+    display: flex;
+
+    width: 100%;
+    height: 100%;
+
+}
+
+.side {
+    position: relative;
+    z-index: 2;
+
+    flex: none;
+    width: 360px;
+    overflow-y: scroll;
+
+    background: #C12026;
+    box-shadow: 1px 0 13px 0px rgba(0, 0, 0, 0.7);
+}
+
+.side::-webkit-scrollbar {
+    width: 25px;
+    height: 25px;
+
+    background: #F0F0F0;
+}
+
+.side::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    border: 7px solid transparent;
+
+    background: #D1D1D1;
+    background-clip: padding-box;
+}
+
+.side .trainer {
+    margin-bottom: 20px;
+
+    text-align: center;
+
+    background: #F0F0F0;
+    box-shadow: 0 5px 13px 0px rgba(0, 0, 0, 0.7);
+}
+
+.side .trainer .content {
+    position: relative;
+    display: inline-block;
+
+    padding: 15px 20px;
+}
+
+.side .trainer .content::before {
+    position: absolute;
+    right: 100%; bottom: 0;
+    content: '';
+
+    width: 28px;
+    height: 100%;
+
+    background-image: url(http://i.imgur.com/LhmnXct.png);
+    background-repeat: no-repeat;
+    background-position: bottom left;
+}
+
+.trainer .name {
+    font-weight: bold;
+}
+
+.trainer .gold {
+    font-style: italic;
+}
+
+.side .team {
+    margin: 10px 0;
+    padding-left: 10px;
+}
+
+.team .slot {
+    height: 100px;
+}
+
+.team .slot::before {
+    display: block;
+    content: '';
+
+    height: 20px;
+}
+
+.team .slot:first-child {
+    height: 80px;
+}
+
+.team .slot:first-child::before {
+    display: none;
+}
+
+.team .slot.empty {
+    height: 0;
+    overflow: hidden;
+
+    transition-delay: .3s;
+    transition: height .3s;
+}
+
+.team .slot .pokemon {
+    position: relative;
+    display: flex;
+
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+
+    height: 80px;
+
+    padding-top: 10px;
+    padding-left: 10px;
+
+    line-height: 70px;
+
+    background: #F0F0F0;
+    box-shadow: 0 5px 13px 0px rgba(0, 0, 0, 0.7);
+
+    transition: all .3s;
+}
+
+.team .slot.empty .pokemon {
+    -webkit-transform: rotateX(-90deg);
+}
+
+.team .pokemon .life {
+    position: absolute;
+    top: 0; left: 0;
+
+    width: 100%;
+    height: 10px;
+
+    border-top-left-radius: 10px;
+
+    /* Mask fix for Chrome - http://stackoverflow.com/questions/5736503/how-to-make-css3-rounded-corners-hide-overflow-in-chrome-opera */
+    -webkit-mask-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC");
+}
+
+.team .pokemon .life .bar {
+    height: 100%;
+
+    border-bottom-right-radius: 10px;
+
+    background: #0A810A;
+
+    transition: width .3s;
+}
+
+.team .pokemon .experience {
+    position: absolute;
+    top: 0; left: 0;
+
+    width: 10px;
+    height: 100%;
+
+    border-bottom-left-radius: 10px;
+
+    padding-top: 10px;
+
+    /* Mask fix for Chrome - http://stackoverflow.com/questions/5736503/how-to-make-css3-rounded-corners-hide-overflow-in-chrome-opera */
+    -webkit-mask-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC");
+}
+
+.team .pokemon .experience .bar {
+    width: 100%;
+
+    border-bottom-right-radius: 10px;
+
+    background: #BB6D31;
+
+    transition: height .3s;
+}
+
+.team .pokemon .preview {
+    margin: 2px 5px;
+
+    width: 96px;
+
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.team .pokemon .infos {
+    padding: 0 20px;
+}
+
+.team .pokemon .infos a {
+    text-decoration: none;
+
+    color: #126CDF;
+}
+
+.bag {
+    margin: 10px;
+}
+
+.bag .item {
+    display: flex;
+
+    margin-top: 20px;
+
+    border-radius: 5px;
+
+    padding: 7px 14px;
+
+    background: #F0F0F0;
+    box-shadow: 0 5px 13px 0px rgba(0, 0, 0, 0.7);
+}
+
+.bag .item .name {
+    display: block;
+
+    flex: auto;
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.bag .item .count {
+    display: block;
+
+    margin-left: 10px;
+
+    flex: none;
+}
+
+.bag .item a {
+    text-decoration: none;
+
+    color: #126CDF;
+}
+
+.separator {
+    display: none;
+    position: relative;
+    z-index: 1;
+
+    flex: none;
+    width: 20px;
+
+    background: #F0F0F0;
+    box-shadow: 1px 0 13px 0px rgba(0, 0, 0, 0.7);
+}
+
+.screen {
+    position: relative;
+    display: flex;
+
+    flex: auto;
+
+    padding: 0 15px;
+
+    background: #FFFFFF;
+}
+
+.screen .emulator {
+    flex: auto;
+}
+
+.screen .emulator canvas {
+    outline: none;
+}
+
+.screen .help {
+    position: absolute;
+    left: 0; bottom: 0;
+}
+
+.screen .help.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+
+    margin: 20px;
+
+    width: 70px;
+    height: 70px;
+
+    border: 2px solid #000000;
+    border-radius: 100px;
+
+    font-size: 56px;
+
+    background: #FFFFFF;
+
+    cursor: pointer;
+}
+
+.screen .help.overlay {
+    display: flex;
+    right: 0; top: 0;
+    z-index: 1;
+
+    background: rgba(0, 0, 0, .9);
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: opacity .3s;
+}
+
+.screen .help.button:hover {
+    background: #D1D1D1;
+}
+
+/*.screen .help.button:hover + .help.overlay,*/
+.help.overlay.active {
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+
+.screen .help.overlay .window {
+    margin: auto;
+
+    max-width: 550px;
+
+    border-radius: 25px;
+
+    padding: 0 25px;
+
+    color: #FFFFFF;
+    background: #343434;
+}
+
+.screen .help.overlay .window p,
+.screen .help.overlay .window ul {
+    margin: 25px 0;
+}
+
+.screen .help.overlay .window a {
+    color: #9292EE;
+}
+
+.screen .help.overlay .window li {
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    list-style-type: none;
+}
+
+.screen .help.overlay .window .key {
+    display: inline-block;
+
+    border: #101010;
+    border-radius: 5px;
+
+    padding: 5px;
+
+    font-variant: small-caps;
+    font-weight: bold;
+
+    color: #101010;
+    background: #F0F0F0;
+}

@@ -6,19 +6,109 @@
         <meta charset="utf-8" />
         <title>Pokelib Example</title>
 
-        <link rel="stylesheet" href="./styles/application.css" />
+        <link rel="stylesheet" href="assets/vendors/AddResizeListener.css" />
+        <link rel="stylesheet" href="stylesheets/application.css" />
+
+        <script src="assets/vendors/Angular-1.3.0b.min.js"></script>
+        <script src="assets/vendors/Esprima-140212.js"></script>
+        <script src="assets/vendors/Escodegen-1.2.0.min.js"></script>
+        <script src="assets/vendors/AddResizeListener.js"></script>
+        <script src="assets/vendors/SparkMD5-20140427.min.js"></script>
+        <script src="assets/vendors/Virtjs-0.0.3.min.js"></script>
+        <script src="assets/vendors/Virtjs.GameBoy-0.0.3.min.js"></script>
+
+        <script src="assets/vendors/Require-2.1.10.min.js"></script>
+
+        <script src="sources/BasicAuth.js"></script>
+        <script src="sources/SizeMonitoring.js"></script>
+        <script src="sources/Emulator.js"></script>
+        <script src="sources/EmulatorTypes.js"></script>
+        <script src="sources/Application.js"></script>
+
+        <script src="config.js"></script>
+        <script src="startup.js"></script>
 
     </head>
 
-    <body>
+    <body ng-controller="root">
 
-        <script src="./assets/vendors/Esprima-140212.js"></script>
-        <script src="./assets/vendors/Escodegen-1.2.0.min.js"></script>
+        <div class="interface">
 
-        <script src="./assets/vendors/Require-2.1.10.min.js"></script>
-        <script src="./sources/main.js"></script>
+            <div class="side">
 
-        <div id="infos">
+                <div class="trainer" ng-cloak ng-if="ready" ng-controller="trainer">
+
+                    <div class="content">
+                        <a class="name" ng-click="changeName()">{{ name }}</a> — <a class="gold" ng-click="changeGold()">${{ gold }}</a>
+                    </div>
+
+                </div>
+
+                <div class="team" ng-cloak ng-if="ready">
+
+                    <div class="slot" ng-repeat="index in [0, 1, 2, 3, 4, 5]" ng-controller="team-member" ng-class="{ 'empty' : empty }">
+
+                        <div class="pokemon">
+
+                            <div class="experience"><div class="bar" style="height: {{ expPercent * 100 }}%;"></div></div>
+                            <div class="life"><div class="bar" style="width: {{ hpPercent * 100 }}%;"></div></div>
+
+                            <div class="preview" style="background-image:url(http://www.pokemonelite2000.com/sprites/bw/{{ pokedexId }}.png)"></div>
+
+                            <div class="infos">
+                                <a class="name" ng-click="changeName()">{{ name }}</a> — <a class="level" ng-click="changeLevel()">L {{ level }}</a>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="bag" ng-cloak ng-if="ready" ng-controller="bag">
+
+                    <div class="item" ng-repeat="item in items">
+                        <span class="name">{{ item.item.name() }}</span>
+                        <a class="count" ng-click="changeCount($index)">x{{ item.count }}</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="separator">
+            </div>
+
+            <div class="screen">
+
+                <a href="https://github.com/arcanis/pokelib">
+                    <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" />
+                </a>
+
+                <emulator class="emulator" type="gb" rom="assets/roms/pokemonred.gb" ident="main" size-monitoring="size" width="{{ size.width }}" height="{{ size.height }}" engine="engine">
+                </emulator>
+
+                <div ng-controller="help">
+
+                    <div class="help button" ng-click="toggle()">?</div>
+                    <div class="help overlay" ng-click="hide()" ng-class="{ 'active' : active }">
+                        <div class="window">
+                            <p>Click on the screen, then control the emulator using the following keys :</p>
+                            <ul>
+                                <li><span class="key">A</span> / <span class="key">Q</span> : A
+                                <li><span class="key">Z</span> / <span class="key">W</span> : B
+                                <li><span class="key">Enter</span> : Start
+                                <li><span class="key">Space</span> : Select
+                            </ul>
+                            <p>You will see the left panel fill in with the runtime data extracted from the running emulator - click to edit them.</p>
+                            <p>The emulator is powered by <a href="https://github.com/arcanis/virt.js">Virt.js</a>.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
 
     </body>
