@@ -4,16 +4,16 @@ Pokelib is a Javascript library based on [Virt.js](https://github.com/arcanis/vi
 
 **Note** This library is originally a proof of concept. However, it is very usable and pull requests / issues will be looked upon. Please consider updating the README documentation when adding new methods.
 
-## ![](http://www.pokemonelite2000.com/sprites/rbspr/rbspr003.png) Usage
+## ![](http://www.pokemonelite2000.com/sprites/rbspr/rbspr146.png) Usage
 
 This code assume that you have a Virt.js engine already running.
 
 ```js
 var pokelib = new Pokelib( engine );
 
-pokelib.on( 'teamslots', function ( e ) {
+pokelib.on( 'team.player', function ( e ) {
 
-    var slot = pokelib.teamslots[ e.index ];
+    var slot = pokelib.teams.player[ 0 ];
 
     if ( slot.species( ) === null ) {
         console.log( 'There is no more pokemon in the slot #' + e.index );
@@ -24,15 +24,15 @@ pokelib.on( 'teamslots', function ( e ) {
 } );
 ```
 
-## ![](http://www.pokemonelite2000.com/sprites/rbspr/rbspr006.png) Example
+## ![](http://www.pokemonelite2000.com/sprites/rbspr/rbspr145.png) Example
 
-A basic example is shown [here](http://arcanis.github.io/pokelib/example/). It will display your current team and current bag in real time. Pull requests to add new features to this example (such as listing more data, allowing to instantly send pokemon from the PC to the team, ...) are welcomed.
+A basic example is shown [here](http://arcanis.github.io/pokelib/example/). It will display your current team and current bag in real time. Pull requests to add new features to this example (such as listing more data, allowing to instantly send pokemon from the PC to the team, ...) are welcomed!
 
-## ![](http://www.pokemonelite2000.com/sprites/rbspr/rbspr009.png) Reference
+## ![](http://www.pokemonelite2000.com/sprites/rbspr/rbspr144.png) Reference
 
 > *Coming soon*
 
-## ![](http://www.pokemonelite2000.com/sprites/rbspr/rbspr151.png) License
+## ![](http://www.pokemonelite2000.com/sprites/rbspr/rbspr150.png) License
 
 Should someone from Nintendo see this and be offensed by the ROM presence in the example directory (which is only used for demonstration purpose), please feel free to contact me (either by a [regular issue](https://github.com/arcanis/pokelib) on this repository, or by email for more privacy - check [my Github profile](https://github.com/arcanis)), and I will remove the copyrighted material from the repository.
 
