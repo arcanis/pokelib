@@ -103,19 +103,19 @@ define( [
             this.bag = new Bag( this );
 
             this.items = [ ];
-            for ( var t = 0; t < 255; ++ t )
+            for ( var t = 0; t <= 255; t++ )
                 this.items[ t ] = new Item( this, t );
 
             this.growthRates = [ ];
-            for ( var t = 0; t < 5; ++ t )
+            for ( var t = 0; t < 5; t++ )
                 this.growthRates[ t ] = new GrowthRate( this, t );
 
             this.species = [ ];
-            for ( var t = 0; t < 255; ++ t )
+            for ( var t = 0; t <= 255; t++ )
                 this.species[ t ] = new Species( this, t );
 
             this.moves = [ ];
-            for ( var t = 0; t < 165; ++ t )
+            for ( var t = 0; t <= 255; t++ )
                 this.moves[ t ] = new Move( this, t );
 
             this.pokedex = new Pokedex( this );

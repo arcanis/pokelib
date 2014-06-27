@@ -53,7 +53,7 @@
                             <div class="experience"><div class="bar" style="height: {{ expPercent * 100 }}%;"></div></div>
                             <div class="life"><div class="bar" style="width: {{ hpPercent * 100 }}%;"></div></div>
 
-                            <div class="preview" style="background-image:url(http://www.pokemonelite2000.com/sprites/bw/{{ pokedexId }}.png)"></div>
+                            <div class="preview" style="{{ pokedexId > -1 ? 'background-image:url(http://www.pokemonelite2000.com/sprites/bw/'+pokedexId+'.png)' : '' }}"></div>
 
                             <div class="infos">
                                 <a class="name" ng-click="changeName()">{{ name }}</a> — <a class="level" ng-click="changeLevel()">L {{ level }}</a>

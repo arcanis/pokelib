@@ -19,6 +19,8 @@ define( [
         initialize : function ( pokelib, index ) {
 
             this._pokelib = pokelib;
+			if (index == 0) index = 255;
+			else index -= 1;
             this._index = index;
 
             this._pokedexIdBank = 0x10;
