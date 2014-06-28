@@ -42,12 +42,23 @@ define( [
          */
 
         name : function ( ) {
+            if ( this._index >= 0xc4 ) {
+                // this item is a TM/HM
+                if ( this._index <= 0xc8 ) {
+                    return "HM0" + ( this._index - 0xc3 );
+                }
+                var machNum = this._index - 0xc8;
+                if ( machNum < 10 ) return "TM0" + machNum;
+                return "TM" + machNum;
+            }
 
             return this._pokelib.bankSwitch( this._nameBank, function ( ) {
 
                 var address = this._baseNameAddress;
+				
+                var realIndex = ( this._index - 1 ) & 0xff;
 
-                for ( var t = 0, T = this._index; t < T; ++ t )
+                for ( var t = 0, T = realIndex; t < T; ++ t )
                     address += this._pokelib.readPds( address ).length;
 
                 return utilities.pdsToUtf8( this._pokelib.readPds( address ) );

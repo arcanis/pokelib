@@ -43,13 +43,13 @@ define( [
         indexOf : function ( item ) {
 
             if ( item instanceof Item )
-                item = item.index( ) + 1;
+                item = item.index( );
 
             for ( var index = 0, count = this.length( ); index < count; ++ index )
                 if ( this._pokelib.readUint8( this._firstAddress + index * 2 + 0 ) === item )
-                    break ;
+                    return index;
 
-            return index !== count ? index : - 1;
+            return - 1;
 
         },
 
@@ -88,7 +88,7 @@ define( [
                 return null;
 
             return {
-                item : this._pokelib.items[ this._pokelib.readUint8( this._firstAddress + index * 2 + 0 ) - 1 ],
+                item : this._pokelib.items[ this._pokelib.readUint8( this._firstAddress + index * 2 + 0 ) ],
                 count : this._pokelib.readUint8( this._firstAddress + index * 2 + 1 )
             };
 
@@ -121,7 +121,7 @@ define( [
         add : function ( item, howMany ) {
 
             if ( item instanceof Item )
-                item = item.index( ) + 1;
+                item = item.index( );
 
             if ( typeof howMany === 'undefined' )
                 howMany = 1;
@@ -133,8 +133,9 @@ define( [
 
             if ( index === - 1 ) {
                 // If the item type is not in the bag yet, we add a slot
-                this._pokelib.writeUint8( this._firstAddress - 1, this.length( ) + 1 );
-                this._pokelib.writeUint8( this._firstAddress + index * 2 + 0, item.index( ) );
+                index = this.length( );
+                this._pokelib.writeUint8( this._firstAddress - 1, index + 1 );
+                this._pokelib.writeUint8( this._firstAddress + index * 2 + 0, item );
                 this._pokelib.writeUint8( this._firstAddress + index * 2 + 1, Math.min( howMany, 0xFF ) );
                 this._pokelib.writeUint8( this._firstAddress + ( index + 1 ) * 2 + 0, 0xFF );
             } else {
@@ -158,7 +159,7 @@ define( [
         remove : function ( item, howMany ) {
 
             if ( item instanceof Item )
-                item = item.index( ) + 1;
+                item = item.index( );
 
             if ( typeof howMany === 'undefined' )
                 howMany = Infinity;

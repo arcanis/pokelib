@@ -19,7 +19,7 @@ define( [
         initialize : function ( pokelib, index ) {
 
             this._pokelib = pokelib;
-            this._index = index;
+            this._index = ( index - 1 ) & 0xff;
 
             this._pokedexIdBank = 0x10;
             this._pokedexIdAddress = 0x5024 + this._index;

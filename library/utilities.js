@@ -7,7 +7,7 @@ define( [
 ], function ( Virtjs ) {
 
     var pdsSpecialCharacters = [ 0x60, 0x61, 0x62, 0x63, 0x64, 0x65, 0x66, 0x67, 0x68, 0x69, 0x6A, 0x6B, 0x6C, 0x6D, 0xBB, 0xBC, 0xBD, 0xBE, 0xBF, 0xE1, 0xE2, 0xE4, 0xE5, 0xF0 ];
-    var pdsRegularCharacters = '�������������:ィゥ‘’“”·⋯ぁぇえ╔═╗║╚╝ ABCDEFGHIJKLMNOPQRSTUVWXYZ():;[]abcdefghijklmnopqrstuvwxyzé�����                                ���-��?!.ァ���▷▶▼♂�×./,♀0123456789';
+    var pdsRegularCharacters = '�������������:ぃぅ‘’“”·⋯ぁぇえ╔═╗║╚╝ ABCDEFGHIJKLMNOPQRSTUVWXYZ():;[]abcdefghijklmnopqrstuvwxyzé�����                                \'��-��?!.ァゥェ▷▶▼♂$×./,♀0123456789';
 
     return {
 
