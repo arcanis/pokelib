@@ -45,14 +45,11 @@ define( [
             if ( item instanceof Item )
                 item = item.index( );
 
-			var found = false;
             for ( var index = 0, count = this.length( ); index < count; ++ index )
-                if ( this._pokelib.readUint8( this._firstAddress + index * 2 + 0 ) === item ) {
-					found = true;
-                    break ;
-				}
+                if ( this._pokelib.readUint8( this._firstAddress + index * 2 + 0 ) === item )
+                    return index;
 
-            return found ? index : - 1;
+            return - 1;
 
         },
 
@@ -136,7 +133,7 @@ define( [
 
             if ( index === - 1 ) {
                 // If the item type is not in the bag yet, we add a slot
-				index = this.length();
+                index = this.length( );
                 this._pokelib.writeUint8( this._firstAddress - 1, index + 1 );
                 this._pokelib.writeUint8( this._firstAddress + index * 2 + 0, item );
                 this._pokelib.writeUint8( this._firstAddress + index * 2 + 1, Math.min( howMany, 0xFF ) );

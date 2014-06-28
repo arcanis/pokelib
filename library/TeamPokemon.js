@@ -69,9 +69,9 @@ define( [
         species : function ( value ) {
 
             if ( typeof value === 'undefined' ) {
-				// do NOT rely on the species being 0x00 or 0xff!
-				// instead, get the number of pokemon from D163 (in English R/B)!
-				if (this._pokelib.readUint8(0xd163) < (this._index + 1)) return null;
+                // do NOT rely on the species being 0x00 or 0xff!
+                // instead, get the number of pokemon from D163 (in English R/B)!
+                if ( this._pokelib.readUint8( 0xd163 ) < ( this._index + 1 ) ) return null;
 
                 var speciesIndex = this._pokelib.readUint8( this._speciesAddress );
 
