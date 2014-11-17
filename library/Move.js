@@ -22,7 +22,7 @@ define( [
             this._index = index;
 
             this._dataBank = 0x0E;
-            this._dataAddress = 0x4000;
+            this._dataAddress = 0x4000; // Same address for all versions + languages :)
 
         },
 

@@ -25,7 +25,7 @@ define( [
 
         length : function ( ) {
 
-            return this._pokelib.readUint8( 0xD163 );
+            return this._pokelib.readUint8( ( this._pokelib.isJapan( ) ? 0xD123 : this._pokelib.getAddress( 0xD163 ) ) );
 
         },
 

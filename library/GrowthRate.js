@@ -22,7 +22,11 @@ define( [
             this._index = index;
 
             this._bank = 0x16;
-            this._address = 0x501D + index * 4;
+            if ( this._pokelib.version[0] == "Yellow" ) this._address = 0x4e73;
+            else if ( this._pokelib.version[0] == "Blue" /* JP */ ) this._address = 0x50b8;
+            else if ( this._pokelib.version[0] == "R/G" /* JP */ ) this._address = 0x5068;
+            else this._address = 0x501D;
+            this.address += index * 4;
 
         },
 

@@ -22,10 +22,26 @@ define( [
             this._index = ( index - 1 ) & 0xff;
 
             this._pokedexIdBank = 0x10;
-            this._pokedexIdAddress = 0x5024 + this._index;
+            if ( this._pokelib.version[ 0 ] == "R/G" /* jp */ ) this._pokedexIdAddress = 0x679a;
+            else if ( this._pokelib.version[ 0 ] == "Blue" /* jp */ ) this._pokedexIdAddress = 0x6784;
+            else if ( this._pokelib.version[ 0 ] == "R/B" ) {
+                if ( this._pokelib.version[ 1 ] == "DE" ) this._pokedexIdAddress = 0x4f96;
+                else if ( this._pokelib.version[ 1 ] == "ES" ) this._pokedexIdAddress = 0x4fb4;
+                else if ( this._pokelib.version[ 1 ] == "FR" ) this._pokedexIdAddress = 0x4faa;
+                else if ( this._pokelib.version[ 1 ] == "IT" ) this._pokedexIdAddress = 0x4fb6;
+                else if ( this._pokelib.version[ 1 ] == "EN" ) this._pokedexIdAddress = 0x5024;
+            } else if ( this._pokelib.version[ 0 ] == "Yellow" ) {
+                if ( this._pokelib.isJapan( ) ) this._pokedexIdAddress = 0x682d;
+                else if ( this._pokelib.version[ 1 ] == "EN" ) this._pokedexIdAddress = 0x50b1;
+                else if ( this._pokelib.version[ 1 ] == "DE" ) this._pokedexIdAddress = 0x5023;
+                else if ( this._pokelib.version[ 1 ] == "ES" ) this._pokedexIdAddress = 0x5041;
+                else if ( this._pokelib.version[ 1 ] == "FR" ) this._pokedexIdAddress = 0x5036;
+                else if ( this._pokelib.version[ 1 ] == "IT" ) this._pokedexIdAddress = 0x5043;
+            }
+            this._pokedexIdAddress += this._index;
 
             this._speciesDataBank = 0x0E;
-            this._speciesDataAddress = 0x43DE + this.pokedexId( ) * 28;
+            this._speciesDataAddress = 0x43DE + this.pokedexId( ) * 28; // comes after move data; thus, is the same for all versions + languages :)
 
         },
 
