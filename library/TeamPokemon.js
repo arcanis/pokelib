@@ -22,9 +22,15 @@ define( [
             this._pokelib = pokelib;
             this._index = index;
 
-            this._speciesAddress = 0xD164 + index * 1;
-            this._dataAddress    = 0xD16B + index * 44;
-            this._nameAddress    = 0xD2B5 + index * 11;
+            if ( this._pokelib.isJapan( ) ) {
+                this._speciesAddress = 0xd124 + index;
+                this._dataAddress = 0xd12b + index * 44;
+                this._nameAddress = 0xd257 + index * 6;
+            } else {
+                this._speciesAddress = this._pokelib.getAddress( 0xD164 ) + index * 1;
+                this._dataAddress    = this._pokelib.getAddress( 0xD16B ) + index * 44;
+                this._nameAddress    = this._pokelib.getAddress( 0xD2B5 ) + index * 11;
+            }
 
         },
 
@@ -43,14 +49,14 @@ define( [
 
             if ( typeof value === 'undefined' ) {
 
-                return utilities.pdsToUtf8( this._pokelib.readPds( this._nameAddress ) );
+                return utilities.pdsToUtf8( this._pokelib.version[ 1 ], this._pokelib.readPds( this._nameAddress ) );
 
             } else {
 
-                if ( value.length > 10 )
-                    throw new Error( 'A pokemon name cannot have a length greater than 10 characters' );
+                if ( ( ( this._pokelib.isJapan( ) ) && ( value.length > 5 ) ) || ( value.length > 10 ) )
+                    throw new Error( 'A pokemon name cannot have a length greater than ' + ( this._pokelib.isJapan( ) ? 5 : 10 ) + ' characters' );
 
-                this._pokelib.writePds( this._nameAddress, utilities.utf8ToPds( value ) );
+                this._pokelib.writePds( this._nameAddress, utilities.utf8ToPds( this._pokelib.version[ 1 ], value ) );
 
                 return this;
 
@@ -70,8 +76,8 @@ define( [
 
             if ( typeof value === 'undefined' ) {
                 // do NOT rely on the species being 0x00 or 0xff!
-                // instead, get the number of pokemon from D163 (in English R/B)!
-                if ( this._pokelib.readUint8( 0xd163 ) < ( this._index + 1 ) ) return null;
+                // instead, get the number of pokemon!
+                if ( this._pokelib.readUint8( ( this._pokelib.isJapan( ) ? 0xD123 : this._pokelib.getAddress( 0xD163 ) ) ) < ( this._index + 1 ) ) return null;
 
                 var speciesIndex = this._pokelib.readUint8( this._speciesAddress );
 

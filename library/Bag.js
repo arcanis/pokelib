@@ -25,8 +25,13 @@ define( [
 
             this._pokelib = pokelib;
 
-            this._firstAddress = 0xD31E;
-            this._lastAddress = 0xD344;
+            if ( this._pokelib.isJapan( ) ) {
+                this._firstAddress = 0xD2A2;
+                this._lastAddress = 0xD2C9;
+            } else {
+                this._firstAddress = this._pokelib.getAddress( 0xD31E );
+                this._lastAddress = this._pokelib.getAddress( 0xD344 );
+            }
 
             this._maxCount = ( this._lastAddress - this._firstAddress ) / 2 + 1;
 

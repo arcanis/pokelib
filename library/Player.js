@@ -20,8 +20,13 @@ define( [
 
             this._pokelib = pokelib;
 
-            this._nameAddress = 0xD158;
-            this._goldAddress = 0xD347;
+            if ( this._pokelib.isJapan( ) ) {
+                this._nameAddress = 0xD11D;
+                this._goldAddress = 0xD2CB;
+            } else {
+                this._nameAddress = this._pokelib.getAddress( 0xD158 );
+                this._goldAddress = this._pokelib.getAddress( 0xD347 );
+            }
 
         },
 
@@ -40,14 +45,14 @@ define( [
 
             if ( typeof value === 'undefined' ) {
 
-                return utilities.pdsToUtf8( this._pokelib.readPds( this._nameAddress ) );
+                return utilities.pdsToUtf8( this._pokelib.version[ 1 ], this._pokelib.readPds( this._nameAddress ) );
 
             } else {
 
-                if ( value.length > 10 )
-                    throw new Error( 'You trainer name cannot have more than 10 characters' );
+                if ( ( ( this._pokelib.isJapan( ) ) && ( value.length > 5 ) ) || ( value.length > 10 ) )
+                    throw new Error( 'Your trainer name cannot have more than ' + ( this._pokelib.isJapan( ) ? 5 : 10 ) + ' characters' );
 
-                this._pokelib.writePds( this._nameAddress, utilities.utf8ToPds( value ) );
+                this._pokelib.writePds( this._nameAddress, utilities.utf8ToPds( this._pokelib.version[ 1 ], value ) );
 
                 return this;
 
